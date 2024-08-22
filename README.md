@@ -16,7 +16,8 @@ For these reasons and based on previous customer experiences, I created this gen
 ## How?
 
 As mentioned above, this is a Java SDK based Mule 4 connector. However, in order to maximize customization to each customer's requirements while avoiding steep Java SDK learning curves, you can easily modify the output JSON data structure as well as connector configuration by editing 2 simple JSON schemas provided under:
->/json-logger/src/main/resources/schema/
+
+> /json-logger/src/main/resources/schema/
 
 In a nutshell, by defining the output JSON schema as well as providing some additional SDK specific details (e.g. default values, default expressions, etc.), we can dynamically generate a module that aligns to those schemas.
 
@@ -29,7 +30,8 @@ PART 1: https://blogs.mulesoft.com/dev/anypoint-platform-dev/json-logging-in-mul
 PART 2: https://blogs.mulesoft.com/dev/api-dev/json-logging-in-mule-4/
 
 Running the provided deployment script will deploy JSON Logger to your Organization's Exchange:
->e.g. ./deploy-to-exchange.sh <ANYPOINT_ORG_ID>
+
+> e.g. ./deploy-to-exchange.sh <ANYPOINT_ORG_ID>
 
 PS1. You can only use the _deploy.sh_ script once (unless you manually delete the previous asset from your exchange within 7 days of deployment or increase the version in the pom.xml) as you can't deploy the same version to Exchange
 
@@ -47,12 +49,42 @@ PS2. For EU Control Plane deployment you have to modify the `<distributionManage
 </distributionManagement>
 ```
 
-##  Release notes [HERE](https://github.com/mulesoft-consulting/json-logger/blob/mule-4.x/json-logger/README.md)
+## Release notes [HERE](https://github.com/mulesoft-consulting/json-logger/blob/mule-4.x/json-logger/README.md)
 
 ## Author
 
-* **Andres Ramirez** [Slack: @andres.ramirez / Email: andres.ramirez@mulesoft.com]
+- **Andres Ramirez** [Slack: @andres.ramirez / Email: andres.ramirez@mulesoft.com]
 
 ## Support disclaimer
 
-In case you haven't noticed the type of license for the source code, this is provided as a side project under MIT open source license which means it won't be officially supported by MuleSoft as it is considered a custom connector. 
+In case you haven't noticed the type of license for the source code, this is provided as a side project under MIT open source license which means it won't be officially supported by MuleSoft as it is considered a custom connector.
+
+## Notes from Khaled
+
+### Exchange Authorization
+
+Added an authorization header since user/pass don't work if MFA is enabled
+
+### Maven
+
+- latest version of Maven(3.9.9) didn't work, 3.8.8 works
+- to point to Maven installed manually from apache
+
+```
+sudo ln -s /Users/khaledsayed/dev/apache-maven-3.8.8/bin/mvn /usr/local/bin/mvn
+```
+
+### settings.xml
+
+`template-files/settings.xml` should be copied to `~/.m2/settings.xml`
+
+### if java complained
+
+```
+export JAVA_HOME=/usr/local/opt/openjdk@11
+export PATH="$JAVA_HOME/bin:$PATH"
+```
+
+### MFA troubles
+
+Credentials for accounts with MFA don't work for server credentials. I was able to use an anypoint bearer token in the header to deploy 2.1.0 but the trick didn't work for version that supports Java 17

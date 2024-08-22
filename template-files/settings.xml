@@ -3,18 +3,34 @@
   <servers>
     <server>
       <id>Exchange2</id>
-      <username>ANYPOINT_USERNAME</username>
-      <password>ANYPOINT_PASSWORD</password>
+      <configuration>
+        <httpHeaders>
+          <property>
+            <name>Authorization</name>
+            <value>Bearer 1dcbfbb6-f62e-4550-9d23-ac2cb...</value>
+          </property>
+        </httpHeaders>
+      </configuration>
+      <username>{username}</username>
+      <password>{password}</password>
     </server>
     <server>
       <id>anypoint-exchange-v3</id>
-      <username>ANYPOINT_USERNAME</username>
-      <password>ANYPOINT_PASSWORD</password>
+      <configuration>
+        <httpHeaders>
+          <property>
+            <name>Authorization</name>
+            <value>Bearer 1dcbfbb6-f62e-4550-9d23-ac2c8b...</value>
+          </property>
+        </httpHeaders>
+      </configuration>
+      <username>{username}</username>
+      <password>{password}</password>
     </server>
     <server>
       <id>MuleRepository</id>
-      <username>CUSTOMER_EE_REPO_USERNAME</username>
-      <password>CUSTOMER_EE_REPO_PASSWORD</password>
+      <username>VimlyBenefitSolutionsInc.nexus</username>
+      <password>{passwork}</password>
     </server>
   </servers>
 
